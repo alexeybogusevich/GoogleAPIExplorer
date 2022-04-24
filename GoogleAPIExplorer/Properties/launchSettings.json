@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GoogleAPIExplorer": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\obohusevych\\source\\repos\\quote-profiling\\GoogleAPIExplorer\\GoogleAPIExplorer\\Data\\easter-island.jpg"
+    }
+  }
+}
