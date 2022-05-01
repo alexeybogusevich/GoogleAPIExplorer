@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Credentials\**" />
+    <EmbeddedResource Remove="Credentials\**" />
+    <None Remove="Credentials\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Apis" Version="1.57.0" />
     <PackageReference Include="Google.Cloud.Vision.V1" Version="2.4.0" />
   </ItemGroup>

@@ -2,7 +2,10 @@
   "profiles": {
     "GoogleAPIExplorer": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\obohusevych\\source\\repos\\quote-profiling\\GoogleAPIExplorer\\GoogleAPIExplorer\\Data\\easter-island.jpg"
+      "commandLineArgs": "C:\\Users\\obohusevych\\source\\repos\\quote-profiling\\GoogleAPIExplorer\\GoogleAPIExplorer\\Data\\easter-island.jpg",
+      "environmentVariables": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:\\Users\\obohusevych\\source\\repos\\quote-profiling\\GoogleAPIExplorer\\GoogleAPIExplorer\\Credentials\\savvy-music-348908-4dee3b7bb902.json"
+      }
     }
   }
 }

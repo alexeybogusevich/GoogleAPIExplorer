@@ -10,41 +10,47 @@ var detectedTextsTask = client.DetectTextAsync(image);
 var detectedLabelsTask = client.DetectLabelsAsync(image);
 var detectedLandmarksTask = client.DetectLandmarksAsync(image);
 var detectedLogosTask = client.DetectLogosAsync(image);
+var safeSearchAnnotationTask = client.DetectSafeSearchAsync(image);
 
+await Task.WhenAll(new Task[]
+{
+    detectedFacesTask,
+    detectedTextsTask,
+    detectedLabelsTask,
+    detectedLandmarksTask,
+    detectedLogosTask,
+    safeSearchAnnotationTask,
+});
 
-foreach (var face in detectedFaces)
+foreach (var face in detectedFacesTask.Result)
 {
     string poly = string.Join(" - ", face.BoundingPoly.Vertices.Select(v => $"({v.X}, {v.Y})"));
     Console.WriteLine($"FACE | Confidence: {(int)(face.DetectionConfidence * 100)}%; BoundingPoly: {poly}");
 }
 
-var detectedTexts = await client.DetectTextAsync(image);
-foreach (var text in detectedTexts)
+foreach (var text in detectedTextsTask.Result)
 {
     Console.WriteLine($"TEXT | Description: {text.Description}");
 }
 
-var detectedLabels = await client.DetectLabelsAsync(image);
-foreach (var label in detectedLabels)
+foreach (var label in detectedLabelsTask.Result)
 {
     Console.WriteLine($"LABEL | Score: {(int)(label.Score * 100)}%; Description: {label.Description}");
 }
 
-var detectedLandmarks = await client.DetectLandmarksAsync(image);
-foreach (var landmark in detectedLandmarks)
+foreach (var landmark in detectedLandmarksTask.Result)
 {
     Console.WriteLine($"LANDMARK | Score: {(int)(landmark.Score * 100)}%; Description: {landmark.Description}");
 }
 
-var detectedLogos = await client.DetectLogosAsync(image);
-foreach (var logo in detectedLogos)
+foreach (var logo in detectedLogosTask.Result)
 {
     Console.WriteLine($"LOGO | Description: {logo.Description}");
 }
 
-var annotation = await client.DetectSafeSearchAsync(image);
-Console.WriteLine($"SAFE SEARCH | Adult? {annotation.Adult}");
-Console.WriteLine($"SAFE SEARCH | Spoof? {annotation.Spoof}");
-Console.WriteLine($"SAFE SEARCH | Violence? {annotation.Violence}");
-Console.WriteLine($"SAFE SEARCH | Medical? {annotation.Medical}");
+var safeSearchAnnotation = safeSearchAnnotationTask.Result;
+Console.WriteLine($"SAFE SEARCH | Adult? {safeSearchAnnotation.Adult}");
+Console.WriteLine($"SAFE SEARCH | Spoof? {safeSearchAnnotation.Spoof}");
+Console.WriteLine($"SAFE SEARCH | Violence? {safeSearchAnnotation.Violence}");
+Console.WriteLine($"SAFE SEARCH | Medical? {safeSearchAnnotation.Medical}");
 
